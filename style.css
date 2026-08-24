@@ -1,0 +1,432 @@
+/* Retro academic CV — hand-written, no frameworks. Claude-inspired light theme. */
+
+:root {
+  --bg: #faf9f5;
+  --panel: #f0eee6;
+  --text: #141413;
+  --muted: #6b6a63;
+  --rule: #dad9d2;
+  --accent: #c96442;
+  --accent-hover: #a94f32;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Georgia, "Times New Roman", "Noto Serif", serif;
+  font-size: clamp(1.08rem, 1rem + 0.45vw, 1.3rem);
+  line-height: 1.55;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+.mono,
+nav,
+.contact-block,
+dt {
+  font-family: ui-monospace, Menlo, Consolas, "Courier New", monospace;
+}
+
+/* Shell layout: fixed sidebar + scrolling main pane */
+
+.shell {
+  display: grid;
+  grid-template-columns: minmax(260px, 300px) 1fr;
+  height: 100dvh;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  background: var(--panel);
+  border-right: 1px solid var(--rule);
+  padding: 1.5rem 1.25rem;
+  overflow-y: auto;
+}
+
+.site-head h1 {
+  font-size: clamp(1.3rem, 1.15rem + 0.7vw, 1.7rem);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.4em;
+  border-bottom: 3px double var(--accent);
+  padding-bottom: 0.25em;
+}
+
+.site-head h1 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.tagline {
+  font-style: italic;
+  color: var(--muted);
+  font-size: 0.85em;
+  margin: 0 0 1em;
+}
+
+nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35em;
+  font-size: 0.82em;
+}
+
+.nav-label {
+  font-variant: small-caps;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 0.2em;
+  margin: 0 0 0.4em;
+}
+
+nav.pages {
+  margin-bottom: 1.5em;
+}
+
+nav a[aria-current="page"] {
+  font-weight: bold;
+  background: var(--bg);
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.12em;
+}
+
+.contact-block {
+  font-size: 0.78em;
+  margin-top: auto;
+  padding-top: 1.25em;
+  border-top: 1px solid var(--rule);
+}
+
+.contact-block p:not(.nav-label) {
+  margin: 0;
+  line-height: 1.7;
+}
+
+main {
+  overflow-y: auto;
+  outline: none;
+  scroll-behavior: smooth;
+}
+
+.content-col,
+main > * {
+  max-width: 72ch;
+  margin-inline: auto;
+}
+
+#top {
+  position: absolute;
+}
+
+/* Sidebar nav links — retro bracket style */
+
+nav a {
+  text-decoration: none;
+  color: var(--text);
+  padding: 0.15em 0.4em;
+}
+
+nav a::before {
+  content: "\00b7 ";
+  color: var(--accent);
+}
+
+nav a:hover,
+nav a:focus-visible {
+  background: var(--bg);
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 0.12em;
+}
+
+/* Sections & rules */
+
+main section {
+  margin-block: 1.25rem;
+  padding-inline: clamp(1rem, 3vw, 2rem);
+}
+
+main hr {
+  width: min(72ch, calc(100% - 2 * clamp(1rem, 3vw, 2rem)));
+}
+
+hr {
+  border: 0;
+  border-top: 1px dashed var(--rule);
+  margin: 1.5rem auto;
+}
+
+h2 {
+  font-size: 1.25em;
+  font-variant: small-caps;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 0.15em;
+  margin: 0 0 0.6em;
+}
+
+h3 {
+  font-size: 1em;
+  margin: 1.2em 0 0.3em;
+}
+
+p,
+li,
+dd {
+  margin-block: 0.45em;
+}
+
+/* Justified body text with auto hyphenation (main pane only) */
+
+main p,
+main li,
+main dd {
+  text-align: justify;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+ul,
+ol {
+  padding-left: 1.4em;
+}
+
+li::marker {
+  color: var(--muted);
+}
+
+small {
+  color: var(--muted);
+}
+
+/* Links — classic, always underlined, terracotta accent */
+
+a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.12em;
+}
+
+a:visited {
+  color: var(--accent-hover);
+}
+
+a:hover,
+a:focus-visible {
+  color: var(--accent-hover);
+  text-decoration-thickness: 2px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Education — Harvard CV template layout */
+
+.education-entry {
+  margin-bottom: 1.25rem;
+}
+
+.edu-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0 1rem;
+}
+
+.edu-line strong {
+  font-size: 1.08em;
+}
+
+.edu-meta {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.education-entry ul {
+  margin-top: 0.3em;
+}
+
+.education-entry ul ul {
+  margin-top: 0.25em;
+}
+
+.education-entry ul ul li {
+  margin-block: 0.15em;
+}
+
+/* Definition list (experience) */
+
+dl {
+  margin: 0.5em 0;
+}
+
+dt {
+  font-weight: bold;
+  margin-top: 0.9em;
+  font-size: 0.92em;
+}
+
+dd {
+  margin: 0.15em 0 0;
+  padding-left: 1.1em;
+  border-left: 3px solid var(--accent);
+}
+
+.project-points {
+  margin: 0.25em 0 0;
+}
+
+/* Compact lists (skills) */
+
+.plain {
+  list-style: none;
+  padding-left: 0;
+}
+
+.plain li {
+  margin-block: 0.25em;
+}
+
+.plain li::before {
+  content: "\00bb  ";
+  color: var(--muted);
+}
+
+/* Skip link */
+
+.skip {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  z-index: 10;
+  background: var(--panel);
+  color: var(--accent);
+  padding: 0.5em 1em;
+}
+
+.skip:focus {
+  left: 0.5rem;
+  top: 0.5rem;
+}
+
+/* Mobile fallback: sticky top bar, normal document flow */
+
+@media (max-width: 768px) {
+  body {
+    overflow: auto;
+  }
+
+  .shell {
+    display: block;
+    height: auto;
+    min-height: 100dvh;
+  }
+
+  .sidebar {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.25rem 1rem;
+    padding: 0.75rem 1rem;
+    border-right: 0;
+    border-bottom: 1px solid var(--rule);
+    overflow-y: visible;
+  }
+
+  .site-head h1 {
+    font-size: 1.05rem;
+    border-bottom: 0;
+    padding-bottom: 0;
+    margin: 0;
+  }
+
+  .tagline,
+  .contact-block,
+  .nav-label {
+    display: none;
+  }
+
+  nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0 0.75em;
+    font-size: 0.8em;
+  }
+
+  nav.pages {
+    margin-bottom: 0;
+  }
+}
+
+/* Print */
+
+@media print {
+  body {
+    overflow: visible;
+    height: auto;
+    font-size: 11pt;
+  }
+
+  .shell {
+    display: block;
+    height: auto;
+  }
+
+  .sidebar,
+  .skip {
+    display: none;
+  }
+
+  main {
+    overflow: visible;
+  }
+
+  main section {
+    padding-inline: 0;
+    max-width: none;
+  }
+
+  a {
+    color: #000;
+  }
+
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+    word-break: break-all;
+  }
+}
